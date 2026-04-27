@@ -1,65 +1,172 @@
-import Image from "next/image";
+import Link from "next/link";
+import { projects } from "@/content/projects";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="max-w-5xl mx-auto px-6">
+
+      <section className="py-32 border-b border-neutral-100">
+        <p className="text-xs font-mono text-neutral-400 mb-6 tracking-widest uppercase">
+          Available for work
+        </p>
+        <h1 className="text-4xl sm:text-5xl font-medium tracking-tight text-neutral-950 leading-tight max-w-2xl">
+          Frontend Developer building clean, purposeful interfaces.
+        </h1>
+        <p className="mt-6 text-neutral-500 text-lg max-w-xl leading-relaxed">
+          I focus on performance, accessibility, and the kind of detail that makes
+          an interface feel inevitable rather than assembled.
+        </p>
+        <div className="mt-10 flex items-center gap-6">
+          <Link
+            href="/projects"
+            className="text-sm font-medium text-neutral-950 underline underline-offset-4 hover:text-neutral-600 transition-colors"
+          >
+            View Projects
+          </Link>
+          <Link
+            href="#contact"
+            className="text-sm text-neutral-400 hover:text-neutral-700 transition-colors"
+          >
+            Get in touch
+          </Link>
+        </div>
+      </section>
+
+      <section className="py-20 border-b border-neutral-100">
+        <div className="flex items-center justify-between mb-12">
+          <h2 className="text-xs font-mono text-neutral-400 tracking-widest uppercase">
+            Selected work
+          </h2>
+          <Link
+            href="/projects"
+            className="text-xs text-neutral-400 hover:text-neutral-700 transition-colors"
+          >
+            View all
+          </Link>
+        </div>
+
+        <div className="divide-y divide-neutral-100">
+          {projects.slice(0, 3).map((project) => (
+            <div
+              key={project.slug}
+              className="py-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 group"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-mono text-neutral-400">
+                    {project.year}
+                  </span>
+                  <div className="flex gap-1.5">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2 py-0.5 bg-neutral-100 text-neutral-500 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <h3 className="text-base font-medium text-neutral-900 group-hover:text-neutral-600 transition-colors">
+                  {project.title}
+                </h3>
+                <p className="mt-1 text-sm text-neutral-500 max-w-lg">
+                  {project.description}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-4 shrink-0">
+                {project.url ? (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-neutral-400 hover:text-neutral-900 transition-colors"
+                  >
+                    Live
+                  </a>
+                ) : null}
+                {project.repo ? (
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-neutral-400 hover:text-neutral-900 transition-colors"
+                  >
+                    Repo
+                  </a>
+                ) : null}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-20 border-b border-neutral-100 grid sm:grid-cols-3 gap-12">
+        <div>
+          <h2 className="text-xs font-mono text-neutral-400 tracking-widest uppercase mb-6">
+            About
+          </h2>
+        </div>
+        <div className="sm:col-span-2 space-y-4 text-neutral-600 leading-relaxed">
+          <p>
+            I am a frontend developer based in [Your City]. I build interfaces
+            that are fast, accessible, and considered.
+          </p>
+          <p>
+            My work sits at the intersection of engineering and design. I care
+            about the details that most people will not notice but will feel.
+          </p>
+          <p className="text-neutral-400 text-sm">
+            Alongside frontend work, I also explore{" "}
+            <Link
+              href="/security"
+              className="underline underline-offset-4 hover:text-teal-600 transition-colors"
             >
-              Learning
-            </a>{" "}
-            center.
+              cybersecurity
+            </Link>
+            {" "} - CTFs, web vulnerabilities, and security research.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section id="contact" className="py-20">
+        <h2 className="text-xs font-mono text-neutral-400 tracking-widest uppercase mb-12">
+          Contact
+        </h2>
+        <div className="grid sm:grid-cols-3 gap-12">
+          <div className="sm:col-span-2">
+            <p className="text-2xl font-medium text-neutral-950 leading-snug max-w-md">
+              Have a project in mind? Lets talk.
+            </p>
+            <a
+              href="mailto:you@example.com"
+              className="mt-6 inline-block text-sm font-medium underline underline-offset-4 hover:text-neutral-500 transition-colors"
+            >
+              you@example.com
+            </a>
+          </div>
+          <div className="flex flex-col gap-3 text-sm">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-400 hover:text-neutral-900 transition-colors"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-400 hover:text-neutral-900 transition-colors"
+            >
+              LinkedIn
+            </a>
+          </div>
         </div>
-      </main>
+      </section>
+
     </div>
   );
 }
