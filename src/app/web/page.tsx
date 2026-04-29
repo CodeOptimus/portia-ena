@@ -303,13 +303,13 @@ export default function WebHome() {
           </div>
           <div className="sm:col-span-8 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
             <p>
-              I am a developer based in Ghana. For years my job was clear: ship fast, accessible interfaces and partner
-              with design and product. That craft still matters—but I have deliberately moved toward cybersecurity, where
-              the same attention to detail turns into safer defaults and clearer risk tradeoffs.
+              GRC fails when it becomes “policy-only” security—controls that exist on paper, but not in day-to-day
+              operations. I close that gap by building governance that’s clear, owned, and testable.
             </p>
             <p>
-              I care about evidence: reproducible findings, honest severity, and fixes teams can maintain. If we work
-              together, you get someone who has written the components and also poked at where they crack.
+              I translate requirements into practical controls teams can actually follow, prioritize work using risk, and
+              keep evidence tight so audits don’t become fire drills. The goal is simple: a security program that stands
+              up to scrutiny and still works in the real world.
             </p>
           </div>
         </div>
