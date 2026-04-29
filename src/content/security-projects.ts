@@ -8,14 +8,15 @@ export type SecurityProject = {
     url: string | null;
   };
   
-  export const securityProjects: SecurityProject[] = [
-    {
-      slug: "ctf-challenge-one",
-      title: "CTF Challenge Name",
-      description: "Brief description of the vulnerability exploited or technique used.",
-      year: "2025",
-      category: "CTF",
-      tags: ["Web", "XSS", "OWASP"],
-      url: null,
-    },
-  ];
+export const securityProjects: SecurityProject[] = [
+  {
+    slug: "ctf-web-writeup-sample",
+    title: "Web challenge walkthrough",
+    description:
+      "Step-by-step notes: recon, narrowing the bug class, crafting the payload, and documenting so others can reproduce.",
+    year: "2025",
+    category: "Writeup",
+    tags: ["Web", "XSS", "Writeup"],
+    url: null,
+  },
+];
