@@ -15,6 +15,17 @@ export default function Footer() {
   const pathname = usePathname();
   const onWeb = isWebSection(pathname);
 
+  if (pathname === "/") {
+    const year = new Date().getFullYear();
+    return (
+      <footer className="border-t border-neutral-100 dark:border-neutral-900 mt-auto shrink-0">
+        <div className="max-w-5xl mx-auto px-6 py-8 text-center">
+          <p className="text-xs text-neutral-400 dark:text-neutral-600 font-mono">© {year}</p>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="border-t border-neutral-100 dark:border-neutral-900 mt-20">
       <div className="max-w-5xl mx-auto px-6 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
@@ -59,7 +70,7 @@ export default function Footer() {
                 Contact
               </Link>
               <Link
-                href="/"
+                href="/security"
                 className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
               >
                 Security

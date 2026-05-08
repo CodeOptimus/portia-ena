@@ -5,20 +5,26 @@ import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "@/components/theme-provider";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import MainShell from "@/components/main-shell";
+import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
+const site = getSiteUrl();
+const ogUrl = site ? `${site}/` : "https://yoursite.com";
+
 export const metadata: Metadata = {
+  ...(site ? { metadataBase: new URL(`${site}/`) } : {}),
   title: {
     template: "%s — Portia Mawuena Adaletey",
-    default: "Portia Mawuena Adaletey — Cybersecurity portfolio",
+    default: "Portia Mawuena Adaletey — Web & cybersecurity",
   },
   description:
-    "Cybersecurity portfolio—labs, writeups, and practical application security—by a developer who shipped web products first.",
+    "Web developer and cybersecurity professional—product interfaces, application security, labs, and writeups.",
   openGraph: {
-    title: "Portia Mawuena Adaletey — Cybersecurity portfolio",
+    title: "Portia Mawuena Adaletey — Web & cybersecurity",
     description:
-      "Cybersecurity portfolio—labs, writeups, and practical application security—by a developer who shipped web products first.",
-    url: "https://yoursite.com",
+      "Web developer and cybersecurity professional—product interfaces, application security, labs, and writeups.",
+    url: ogUrl,
     siteName: "Portia Mawuena Adaletey",
     locale: "en_US",
     type: "website",
@@ -36,7 +42,7 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased min-h-screen flex flex-col">
         <Script
           id="theme-init"
           strategy="beforeInteractive"
@@ -58,9 +64,7 @@ export default function RootLayout({
         />
         <ThemeProvider>
           <Nav />
-          <main className="pt-14">
-            {children}
-          </main>
+          <MainShell>{children}</MainShell>
           <Footer />
         </ThemeProvider>
       </body>

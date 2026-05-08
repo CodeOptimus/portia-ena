@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { projects } from "@/content/projects";
 import { useFadeIn } from "@/lib/use-fade-in";
+import ProjectCard from "@/components/project-card";
 
 const GITHUB_URL = "https://github.com/CodeOptimus";
 const LINKEDIN_URL = "https://linkedin.com/in/portia-mawuena";
-const EMAIL = "you@example.com";
+const EMAIL = "portiaadaletey@gmail.com";
 
 const capabilities = [
   {
@@ -105,7 +106,7 @@ export default function WebHome() {
                 View projects
               </Link>
               <Link
-                href="/"
+                href="/security"
                 className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
               >
                 Security portfolio
@@ -198,56 +199,8 @@ export default function WebHome() {
           </div>
           <div className="sm:col-span-8 divide-y divide-neutral-100 dark:divide-neutral-900">
             {projects.slice(0, 3).map((project) => (
-              <div
-                key={project.slug}
-                className="py-8 first:pt-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 group"
-              >
-                <div className="flex-1 min-w-0">
-                  {project.role ? (
-                    <p className="text-xs font-mono uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-2">
-                      {project.role}
-                    </p>
-                  ) : null}
-                  <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <span className="text-xs font-mono text-neutral-400 dark:text-neutral-500">{project.year}</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2 py-0.5 bg-neutral-100 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <h3 className="text-base font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400 max-w-lg">{project.description}</p>
-                </div>
-                <div className="flex items-center gap-4 shrink-0">
-                  {project.url ? (
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-                    >
-                      Live
-                    </a>
-                  ) : null}
-                  {project.repo ? (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-                    >
-                      Repo
-                    </a>
-                  ) : null}
-                </div>
+              <div key={project.slug} className="first:pt-0">
+                <ProjectCard project={project} />
               </div>
             ))}
           </div>

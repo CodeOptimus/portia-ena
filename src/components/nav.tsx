@@ -27,7 +27,9 @@ export default function Nav() {
   const pathname = usePathname();
   const [hash, setHash] = useState("");
   const onWeb = isWebSection(pathname);
+  const isGate = pathname === "/";
   const links = navLinks;
+  const homeHref = onWeb ? "/web" : "/security";
 
   useEffect(() => {
     const sync = () => setHash(typeof window !== "undefined" ? window.location.hash : "");
@@ -36,18 +38,18 @@ export default function Nav() {
     return () => window.removeEventListener("hashchange", sync);
   }, []);
 
+  if (isGate) {
+    return null;
+  }
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-sm border-b border-neutral-100 dark:border-neutral-900">
       <nav className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between gap-6">
         <Link
-          href={onWeb ? "/web" : "/"}
+          href={homeHref}
           className="text-sm font-medium tracking-tight text-neutral-950 dark:text-neutral-50"
         >
-          {onWeb ? (
-            "PMweb"
-          ) : (
-            <span className="text-teal-600 dark:text-teal-400">PM.sec</span>
-          )}
+          {onWeb ? "PMweb" : <span className="text-teal-600 dark:text-teal-400">PM.sec</span>}
         </Link>
 
         <ul className="flex items-center gap-6 list-none">
@@ -82,7 +84,7 @@ export default function Nav() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <Link
-            href={onWeb ? "/" : "/web"}
+            href={onWeb ? "/security" : "/web"}
             className={cn(
               "text-xs font-mono px-3 py-1.5 border rounded-full transition-all duration-200",
               onWeb

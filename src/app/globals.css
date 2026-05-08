@@ -163,4 +163,88 @@
       transition: none;
     }
   }
+
+  /* Landing gate: ambient motion + staggered entrance */
+  @keyframes gate-blob {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(4%, -6%) scale(1.08);
+    }
+    66% {
+      transform: translate(-5%, 4%) scale(0.96);
+    }
+  }
+
+  .gate-blob {
+    animation: gate-blob 22s ease-in-out infinite;
+  }
+
+  .gate-blob-delay {
+    animation-delay: -11s;
+  }
+
+  @keyframes gate-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gate-fade-up {
+    opacity: 0;
+    animation: gate-fade-up 0.85s ease forwards;
+  }
+
+  .gate-delay-1 {
+    animation-delay: 0.08s;
+  }
+  .gate-delay-2 {
+    animation-delay: 0.16s;
+  }
+  .gate-delay-3 {
+    animation-delay: 0.26s;
+  }
+  .gate-delay-4 {
+    animation-delay: 0.36s;
+  }
+  .gate-delay-5 {
+    animation-delay: 0.46s;
+  }
+  .gate-delay-6 {
+    animation-delay: 0.56s;
+  }
+  .gate-delay-7 {
+    animation-delay: 0.66s;
+  }
+
+  .gate-grid-fade {
+    background-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  html.dark .gate-grid-fade {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gate-blob {
+      animation: none;
+    }
+    .gate-fade-up {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
