@@ -100,25 +100,17 @@ export default function GateLanding() {
 
           <GateCard delayClass="gate-delay-7 sm:col-span-1">
             <p className="text-xs font-mono uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
-              Both
+              Writer
             </p>
             <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              Same person, two lenses—open either side, or use both links below.
+              Blog-style writeups on building, shipping, learning, and the lessons behind the projects.
             </p>
-            <div className="mt-6 flex flex-col gap-3">
-              <Link
-                href="/web"
-                className="inline-flex items-center justify-center rounded-full border border-neutral-300 dark:border-neutral-700 px-4 py-2.5 text-sm font-medium text-neutral-950 dark:text-neutral-50 hover:border-neutral-900 dark:hover:border-neutral-400 transition-colors"
-              >
-                Web
-              </Link>
-              <Link
-                href="/security"
-                className="inline-flex items-center justify-center rounded-full border border-teal-600/50 dark:border-teal-500/50 px-4 py-2.5 text-sm font-medium text-teal-800 dark:text-teal-200 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-500 dark:hover:text-neutral-950 transition-colors"
-              >
-                Cybersecurity
-              </Link>
-            </div>
+            <Link
+              href="/writer"
+              className="mt-6 inline-flex items-center text-sm font-medium text-neutral-950 dark:text-neutral-50 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-600 hover:decoration-violet-600 dark:hover:decoration-violet-400 transition-[text-decoration-color]"
+            >
+              Enter writer lane →
+            </Link>
           </GateCard>
         </div>
       </div>

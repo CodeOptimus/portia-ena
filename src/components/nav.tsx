@@ -10,7 +10,8 @@ function isWebSection(pathname: string) {
   return (
     pathname.startsWith("/web") ||
     pathname.startsWith("/projects") ||
-    pathname.startsWith("/blog")
+    pathname.startsWith("/blog") ||
+    pathname.startsWith("/writer")
   );
 }
 
@@ -19,7 +20,7 @@ const navLinks = [
   { href: "/projects", label: "Projects" },
   { href: "/security/projects", label: "Writeups" },
   // { href: "/web", label: "Web" },
-  { href: "/blog", label: "Blog" },
+  { href: "/writer", label: "Writer" },
   { href: "/web#contact", label: "Contact" },
 ];
 
@@ -60,7 +61,7 @@ export default function Nav() {
               if (href === "/web#contact") return pathname === "/web" && hash === "#contact";
               if (href === "/security/projects") return pathname.startsWith("/security/projects");
               if (href === "/projects") return pathname.startsWith("/projects");
-              if (href === "/blog") return pathname.startsWith("/blog");
+              if (href === "/writer") return pathname.startsWith("/writer");
               return pathname === href;
             })();
             return (

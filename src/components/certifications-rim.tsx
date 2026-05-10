@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useFadeIn } from "@/lib/use-fade-in";
 import type { Certification } from "@/content/security-credentials";
+import Image from "next/image";
 
 function getYearish(value?: string) {
   if (!value) return "";
@@ -10,10 +11,43 @@ function getYearish(value?: string) {
   return match ? match[0] : value;
 }
 
+function getInitials(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return "?";
+  const parts = trimmed.split(/\s+/).filter(Boolean);
+  const first = parts[0]?.[0] ?? "";
+  const second = (parts.length > 1 ? parts[1]?.[0] : parts[0]?.[1]) ?? "";
+  return (first + second).toUpperCase() || trimmed.slice(0, 2).toUpperCase();
+}
+
+function CertCardWrapper({
+  cert,
+  children,
+}: {
+  cert: Certification;
+  children: React.ReactNode;
+}) {
+  if (!cert.credentialUrl) {
+    return <article className="cert-milestone-card">{children}</article>;
+  }
+
+  return (
+    <a
+      href={cert.credentialUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block cert-milestone-card cursor-pointer"
+      aria-label={`View credential: ${cert.name}`}
+    >
+      {children}
+    </a>
+  );
+}
+
 export default function CertificationsRim({
   certifications,
   title = "Certifications",
-  subtitle = "A quick, visual index—plus a timeline you can verify.",
+  subtitle = "Clickable cards—open Credly / verify links.",
 }: {
   certifications: Certification[];
   title?: string;
@@ -34,7 +68,7 @@ export default function CertificationsRim({
     return copy;
   }, [certifications]);
 
-  const rimItems: Certification[] =
+  const milestones: Certification[] =
     ordered.length > 0
       ? ordered
       : [
@@ -57,72 +91,53 @@ export default function CertificationsRim({
           </p>
         </div>
 
-        <div className="sm:col-span-8 space-y-10">
-          <div className="cert-scroll-fade">
-            <div className="cert-scroll" aria-label="Certifications list">
-              {rimItems.map((c, idx) => (
-                <article key={`${c.name}-${c.issuer}-${idx}`} className="cert-card">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="min-w-0">
-                      <p className="text-xs font-mono text-teal-600 dark:text-teal-400 tracking-widest uppercase">
-                        {c.issuer}
-                      </p>
-                      <p className="mt-2 text-sm font-medium text-neutral-950 dark:text-neutral-50 leading-snug">
-                        {c.name}
-                      </p>
-                      <p className="mt-2 text-xs text-neutral-400 dark:text-neutral-500">
-                        {c.date ?? "—"}
-                        {c.credentialId ? ` · ID: ${c.credentialId}` : ""}
-                      </p>
+        <div className="sm:col-span-8">
+          <div className="cert-vtimeline" aria-label="Certifications timeline">
+            <ol className="cert-vtimeline-track list-none">
+              {milestones.map((c, idx) => {
+                const year = getYearish(c.date) || "—";
+                const side = idx % 2 === 0 ? "cert-left" : "cert-right";
+                return (
+                  <li key={`${c.name}-${c.issuer}-${idx}`} className={`cert-vitem ${side}`}>
+                    <div className="cert-vrail" aria-hidden="true">
+                      <span className="cert-dot" />
+                      <span className="cert-year">{year}</span>
                     </div>
-                    {c.credentialUrl ? (
-                      <a
-                        href={c.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-teal-600 dark:hover:text-teal-400 transition-colors shrink-0"
-                      >
-                        Verify
-                      </a>
-                    ) : null}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
 
-          <div>
-            <h3 className="text-xs font-mono text-teal-600 dark:text-teal-400 tracking-widest uppercase mb-5">
-              Timeline
-            </h3>
-            <ol className="divide-y divide-neutral-100 dark:divide-neutral-900 list-none">
-              {ordered.map((c) => (
-                <li
-                  key={`${c.name}-${c.issuer}`}
-                  className="py-5 first:pt-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3"
-                >
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-neutral-950 dark:text-neutral-50">{c.name}</p>
-                    <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-                      {c.issuer}
-                      {c.date ? ` · ${c.date}` : null}
-                      {c.credentialId ? ` · ${c.credentialId}` : null}
-                    </p>
-                  </div>
-                  {c.credentialUrl ? (
-                    <a
-                      href={c.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-teal-600 dark:hover:text-teal-400 transition-colors shrink-0"
-                    >
-                      View / verify
-                    </a>
-                  ) : (
-                    <span className="text-xs text-neutral-300 dark:text-neutral-700 shrink-0">No public link</span>
-                  )}
-                </li>
-              ))}
+                    <CertCardWrapper cert={c}>
+                      <div className="flex items-start gap-3">
+                        {c.issuerLogoUrl?.trim() ? (
+                          <Image
+                            src={c.issuerLogoUrl.trim()}
+                            alt={`${c.issuer} logo`}
+                            className="cert-issuer-logo"
+                            width={40}
+                            height={40}
+                            unoptimized={c.issuerLogoUrl.trim().toLowerCase().endsWith(".svg")}
+                          />
+                        ) : (
+                          <div className="cert-issuer-fallback" aria-hidden="true">
+                            {getInitials(c.issuer)}
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400 tracking-widest uppercase">
+                            {c.issuer}
+                          </p>
+                          <p className="mt-2 text-sm font-semibold text-neutral-950 dark:text-neutral-50 leading-snug">
+                            {c.name}
+                          </p>
+                          <p className="mt-2 text-xs text-neutral-400 dark:text-neutral-500">
+                            {c.date ?? "—"}
+                            {c.credentialId ? ` · ID: ${c.credentialId}` : ""}
+                            {c.credentialUrl ? " · Click to view" : ""}
+                          </p>
+                        </div>
+                      </div>
+                    </CertCardWrapper>
+                  </li>
+                );
+              })}
             </ol>
           </div>
         </div>

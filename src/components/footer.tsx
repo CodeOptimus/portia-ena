@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import SocialProfileIcons from "@/components/social-profile-icons";
 
 function isWebSection(pathname: string) {
   return (
     pathname.startsWith("/web") ||
     pathname.startsWith("/projects") ||
-    pathname.startsWith("/blog")
+    pathname.startsWith("/blog") ||
+    pathname.startsWith("/writer")
   );
 }
 
@@ -58,10 +60,10 @@ export default function Footer() {
                 Projects
               </Link>
               <Link
-                href="/blog"
+                href="/writer"
                 className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
               >
-                Blog
+                Writer
               </Link>
               <Link
                 href="/web#contact"
@@ -100,29 +102,24 @@ export default function Footer() {
           )}
         </nav>
 
-        <div className="flex flex-col gap-2">
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="mailto:you@example.com"
-            className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-          >
-            Email
-          </a>
+        <div className="flex flex-col gap-4">
+          <SocialProfileIcons />
+          <div className="flex flex-col gap-2">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+            >
+              GitHub
+            </a>
+            <a
+              href="mailto:you@example.com"
+              className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+            >
+              Email
+            </a>
+          </div>
         </div>
 
         <p className="text-xs text-neutral-300 dark:text-neutral-600 font-mono sm:text-right">

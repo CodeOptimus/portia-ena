@@ -164,6 +164,169 @@
     }
   }
 
+  /* Certifications (Milestones-style timeline) */
+  .cert-vtimeline {
+    position: relative;
+    padding: 10px 0;
+  }
+
+  .cert-vtimeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.12);
+    transform: translateX(-0.5px);
+  }
+
+  html.dark .cert-vtimeline::before {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .cert-vtimeline-track {
+    display: grid;
+    gap: 18px;
+  }
+
+  .cert-vitem {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: 16px;
+    min-height: 84px;
+  }
+
+  .cert-vrail {
+    grid-column: 2;
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    width: 72px;
+  }
+
+  .cert-dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 999px;
+    background: rgba(13, 148, 136, 0.95);
+    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.16);
+  }
+
+  html.dark .cert-dot {
+    background: rgba(45, 212, 191, 0.95);
+    box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.18);
+  }
+
+  .cert-year {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  html.dark .cert-year {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .cert-milestone-card {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 214, 200, 0.25);
+    border-radius: 12px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(6px);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .cert-issuer-logo,
+  .cert-issuer-fallback {
+    height: 40px;
+    width: 40px;
+    border-radius: 12px;
+    flex: 0 0 auto;
+  }
+
+  .cert-issuer-logo {
+    object-fit: contain;
+    padding: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  html.dark .cert-issuer-logo {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(10, 10, 10, 0.55);
+  }
+
+  .cert-issuer-fallback {
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  html.dark .cert-issuer-fallback {
+    color: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(10, 10, 10, 0.45);
+  }
+
+  .cert-milestone-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 42px rgba(0, 0, 0, 0.09);
+    border-color: rgba(13, 148, 136, 0.28);
+  }
+
+  .cert-left .cert-milestone-card {
+    grid-column: 1;
+    justify-self: end;
+    width: min(420px, 100%);
+  }
+
+  .cert-right .cert-milestone-card {
+    grid-column: 3;
+    justify-self: start;
+    width: min(420px, 100%);
+  }
+
+  html.dark .cert-milestone-card {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 214, 200, 0.08);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (max-width: 640px) {
+    .cert-vtimeline::before {
+      left: 14px;
+      transform: none;
+    }
+
+    .cert-vitem {
+      grid-template-columns: 72px 1fr;
+      column-gap: 14px;
+      align-items: start;
+    }
+
+    .cert-vrail {
+      grid-column: 1;
+      width: 72px;
+    }
+
+    .cert-left .cert-milestone-card,
+    .cert-right .cert-milestone-card {
+      grid-column: 2;
+      justify-self: stretch;
+      width: 100%;
+    }
+  }
+
   /* Landing gate: ambient motion + staggered entrance */
   @keyframes gate-blob {
     0%,

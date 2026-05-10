@@ -28,7 +28,7 @@ export const projects: Project[] = [
     role: "Frontend project · e-commerce",
     title: "PawnPal",
     description:
-      "A React + Vite e-commerce storefront with product search, cart/checkout/payment flow, user dashboard, and a multi-step seller onboarding experience.",
+      "A pawn-shop style storefront where people list unused goods for sale—built for students, workers, and everyday sellers—with a full browse-to-checkout flow in React + Vite.",
     year: "2024",
     tags: ["React", "Vite", "React Router", "Context API"],
     category: "Ecommerce",
@@ -44,7 +44,7 @@ export const projects: Project[] = [
     ],
     details: {
       overview:
-        "PawnPal is a modern e-commerce frontend built with React + Vite that simulates the complete “browse → cart → checkout → payment” shopping journey. The project focuses on multi-page navigation, reusable UI components, and persistent client-side state (cart + user session), while keeping the interface fast, clean, and mobile-friendly.\n\nIt includes a homepage storefront experience, product search, cart flows with quantity controls, checkout with delivery-method logic, a simulated payment screen, simulated auth UX (login/signup + OTP UI + session persistence), and a multi-step seller onboarding flow.",
+        "PawnPal is a frontend for a pawn-shop style marketplace: a place where people with unused items—often students, working professionals, and everyday civilians—can put those products up for sale in one coherent experience. The goal is an approachable, trustworthy storefront that feels practical for quick listings and casual buyers, not only a tech demo.\n\nOn the implementation side, it is a React + Vite app that walks through the full “browse → cart → checkout → payment” journey. The focus is multi-page navigation, reusable UI, and persistent client-side state (cart + user session) while keeping the UI fast, clean, and mobile-friendly.\n\nIt includes a homepage storefront, product search, cart flows with quantity controls, checkout with delivery-method logic, a simulated payment screen, simulated auth (login/signup + OTP-style UI + session persistence), and a multi-step seller onboarding flow.",
       keyFeatures: [
         "Homepage storefront experience: hero, categories, new arrivals, hot deals (countdown), testimonials, sponsors, footer layout",
         "Product browsing + search via URL query params (e.g. ?q=...) with grid listing",
@@ -162,6 +162,37 @@ export const projects: Project[] = [
     },
     url: null,
     repo: null,
+  },
+  {
+    slug: "bizease-frontend",
+    role: "Team collaboration · inventory management app",
+    title: "BizEase (Inventory management)",
+    description:
+      "A collaborative team-built inventory management web app that helps businesses manage stock and operations online with a clean, usable interface.",
+    year: "2026",
+    tags: ["Next.js", "TypeScript", "Team collaboration"],
+    category: "Web",
+    toolsUsed: ["Next.js", "TypeScript", "Tailwind CSS", "REST APIs"],
+    details: {
+      overview:
+        "BizEase is an inventory management web app delivered with a cross-functional team (different levels and areas of expertise) focused on making day-to-day business operations easier to run online. My contributions were in the frontend delivery and collaboration workflow—aligning UI components, integrating screens, and keeping the UX consistent as features landed in parallel.",
+      keyFeatures: [
+        "Inventory management flows (stock visibility and updates)",
+        "Operational screens designed for business workflow clarity",
+        "Team delivery with shared UI patterns and consistent styling",
+      ],
+      highlights: [
+        "Built in a team setting with clear handoffs and integration discipline",
+        "Focused on practical UX for business users (speed, clarity, repeatable actions)",
+      ],
+      nextImprovements: [
+        "Add role-based access control (RBAC) across sensitive actions",
+        "Audit-friendly activity logs for key inventory updates",
+        "Stronger empty/loading/error states for all data views",
+      ],
+    },
+    url: null,
+    repo: "https://github.com/Techies-Collab-and-Upskill-Live-Project/bizease-frontend",
   },
   {
     slug: "portfolio-platform",
